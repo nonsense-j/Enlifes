@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enlifes 记录生活的每天</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+</head>
+<body>
+<div class="div-area">
+    <strong>{{ data }}</strong><br><br>
+    <img src="{% static 'qrcode.png' %}" alt="二维码获取信息">
+</div>
+</body>
+</html>

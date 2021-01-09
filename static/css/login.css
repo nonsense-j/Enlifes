@@ -1,0 +1,20 @@
+body {
+    margin: 1%;
+    background-image: url("/static/img/details.jpg");
+}
+
+.form-area {
+    width: 50%;
+    margin: 10% auto;
+}
+
+.div-area {
+    width: 50%;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    text-align: center;
+    position: fixed;
+    left: 25%;
+    top: 25%;
+}

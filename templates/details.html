@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Enlifes 浮生一世，为欢几何</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/details.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+</head>
+<body>
+<div id="header">
+    <h3>Enlifes 浮生一世，为欢几何</h3>
+</div>
+
+<div id="nav">
+    <div>
+        <strong>{{ username }}</strong>
+        <HR align=center color=#987cb9 SIZE=1>
+    </div>
+    <div class="list-group">
+        <a href="{% url 'create_diary' %}" class="list-group-item active">
+            <h4 class="list-group-item-heading">记下心情</h4>
+        </a>
+    </div>
+    <div>
+        <table class="table table-hover">
+            <tr>近来心情</tr>
+            {% for title in diary_list %}
+                <tr>
+                    <td id="diary_title" class="active">{{ title }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="list-group-item-warning">
+        <a href="{% url 'logout' %}" class="list-group-item active">
+            <h4 class="list-group-item-heading">退出</h4>
+        </a>
+    </div>
+</div>
+
+<div id="content">
+    <div style="background-color: rgba(255, 255, 255, 0.6); border-radius: 25px;width: 400px;height: 400px">
+        <br>
+        <strong style="margin-left: 20px">最新日记</strong>
+        <p></p>
+        <br>
+        <br>
+        <br>
+        <div style="text-align: center">
+            <h5>标题:</h5>
+            <span id="new_diary_title">{{ new_diary_title }}</span>
+            <h5>时间:</h5>
+            <span id="new_diary_time">{{ new_diary_time }}</span>
+            <h5>内容:</h5>
+            <span id="new_diary_detail">{{ new_diary_detail }}</span>
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <small>@2020 www.enlines.top All Rights Reserved XrazYang</small>
+</div>
+
+<script>
+    $(".table").on("click", "tr", function () {
+        var title = $('#diary_title').text()
+        $.ajax({
+            crossDomain: true,
+            url: "/moredetails",
+            type: 'GET',
+            data: {
+                'title': title
+            },
+            success: function (data) {
+                var res = JSON.parse(data)
+                var title = res[0]["fields"]["title"]
+                var detail = res[0]["fields"]["detail"]
+
+                var time = res[0]["fields"]["create_time"]
+                var create_time = new Date(Date.parse(time))
+                var year = create_time.getFullYear()
+                var month = create_time.getMonth() + 1
+                var day = create_time.getDate()
+                var hour = create_time.getHours()
+                var min = create_time.getMinutes()
+
+                document.getElementById("new_diary_title").innerText = title
+                document.getElementById("new_diary_time").innerText = year + "年" + month + "月" + day + "日 " + hour + ":" + min
+                document.getElementById("new_diary_detail").innerText = detail
+            },
+            error: function () {
+                alert("请求失败！！！")
+            }
+        })
+        ;
+    })
+</script>
+</body>
+</html>
