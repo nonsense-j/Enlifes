@@ -3,11 +3,11 @@ from django.shortcuts import render, redirect, reverse
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import login, logout
 from .models import Diary
-from django.http import JsonResponse
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.core import serializers
 import qrcode
+import json
 
 
 def index(request):
@@ -16,33 +16,30 @@ def index(request):
 
 def qrcodeview(request):
     data = "http://111.229.178.124"
-
-    # 实例化qrcode生成qr对象
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_H,
         box_size=10,
         border=4
     )
-    # 传入数据
     qr.add_data(data)
-
     qr.make(fit=True)
-
-    # 生成二维码
     img = qr.make_image()
-
-    # 保存二维码
     img.save("./static/qrcode.png")
     return render(request, "qrcode.html", {"data": "通过二维码访问接口"})
 
 
 @login_required(login_url='/login')
 def get_more_diary_info(request):
+    diary_content = {}
     if request.method == "GET":
-        details = Diary.objects.all().filter(title=request.GET.get('title'))
-    data = serializers.serialize("json", details)
-    return JsonResponse(data, safe=False, content_type="application/json")
+        content = Diary.objects.all().filter(title=request.GET.get('title'))
+        diary_content['title'] = content[0].title
+        diary_content['time'] = content[0].create_time.strftime("%Y-%m-%d %H:%M:%S")
+        diary_content['detail'] = content[0].detail
+
+    data = json.dumps(diary_content)
+    return HttpResponse(data, content_type="application/json")
 
 
 class DiaryDetails(View):

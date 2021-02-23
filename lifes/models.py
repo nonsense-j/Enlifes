@@ -18,6 +18,8 @@ class Diary(models.Model):
         verbose_name_plural = verbose_name
         db_table = "my_diary"
 
+        # permissions = [()] 自定义权限
+
     def __str__(self):
         return "title = {} , time = {} ,detail = {} ,who = {}".format(self.title, self.create_time, self.detail,
                                                                       self.cdisry)

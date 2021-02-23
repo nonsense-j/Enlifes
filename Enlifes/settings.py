@@ -22,33 +22,33 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '$76-a*vc-7w@4(2m*fesf%_^21mo3r5^lh8&%zyc#$y06cxk(q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.admin',  # 管理员站点
+    'django.contrib.auth',  # 认证授权系统
+    'django.contrib.contenttypes',  # 内容类型框架
+    'django.contrib.sessions',  # 会话框架
+    'django.contrib.messages',  # 消息框架
+    'django.contrib.staticfiles',  # 管理静态文件框架
     'lifes.apps.LifesConfig',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',  # 内置的安全机制，保护用户与网站的通信安全
+    'django.contrib.sessions.middleware.SessionMiddleware',  # 会话Session功能
+    'django.middleware.common.CommonMiddleware',  # 会话Session功能
+    'django.middleware.csrf.CsrfViewMiddleware',  # 会话Session功能
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # 会话Session功能
+    'django.contrib.messages.middleware.MessageMiddleware',  # 会话Session功能
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',  # 会话Session功能
 ]
 
-ROOT_URLCONF = 'Enlifes.urls'
+ROOT_URLCONF = 'Enlifes.urls'  # 根路由
 
 TEMPLATES = [
     {
@@ -84,7 +84,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
+AUTH_PASSWORD_VALIDATORS = [  # 用户密码验证
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
@@ -116,7 +116,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)  # 不能写成/static/
-STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)  # 不能写成/static/
+# STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
 
 LOGIN_URL = '/login/'
