@@ -64,8 +64,8 @@
 </div>
 
 <script>
-    $(".table").on("click", "tr", function () {
-        var title = $('#diary_title').text();
+    $(".table").on("click", "tr", function (e) {
+        var title = $(e.target).text();
         $.ajax({
             crossDomain: true,
             url: "/moredetails",

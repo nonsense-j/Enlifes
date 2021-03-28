@@ -77,7 +77,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'enlifes',
         'USER': 'root',  # 是USER 而不是 USERS
-        'PASSWORD': '123',
+        'PASSWORD': '1213800',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
     }
 }
 
